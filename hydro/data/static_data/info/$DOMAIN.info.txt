@@ -1,0 +1,265 @@
+&HMC_Namelist
+
+! FLAG(S) INFO ----------------------------------------------------------------------------------
+! Debug flag set (iDEBUG = 0, iDEBUG = 1)
+iFlagDebugSet = $IVALUE
+! Debug flag level (iNFO_Basic = 0; iINFO_Main = 1, iINFO_Verbose = 2, iINFO_Extra = 3)
+iFlagDebugLevel = $IVALUE
+
+! Data type land (1 = ascii grid; 2 = netcdf)
+iFlagTypeData_Static = $IVALUE
+
+! Data type dynamic forcing (1 = binary; 2 = netcdf)
+iFlagTypeData_Forcing_Gridded = $IVALUE
+! Data type dynamic forcing (1 = ascii; 2 = unknown)
+iFlagTypeData_Forcing_Point = $IVALUE
+! Data type dynamic gridded output (1 = binary; 2 = netcdf)
+iFlagTypeData_Output_Gridded = $IVALUE
+! Data type dynamic point output (1 = ascii; 2 = netcdf)
+iFlagTypeData_Output_Point = $IVALUE
+! Data type dynamic gridded state (1 = binary; 2 = netcdf)
+iFlagTypeData_State_Gridded = $IVALUE
+! Data type dynamic point state (1 = ascii; 2 = unknown)
+iFlagTypeData_State_Point = $IVALUE
+! Data type dynamic gridded restart (1 = binary; 2 = netcdf)
+iFlagTypeData_Restart_Gridded = $IVALUE
+! Data type dynamic point restart (1 = ascii; 2 = unknown)
+iFlagTypeData_Restart_Point = $IVALUE
+
+! Type of model (1=Windows, 10=Linux)
+iFlagOs = $IVALUE
+! Computing deep Flow (1=yes, 0=no)
+iFlagFlowDeep = $IVALUE
+! Restart a run (1=yes, 0=no)
+iFlagRestart = $IVALUE
+! State save modality (0 0 0: all hours all days; 1 0 h: once a day at hour h; 2 d h: once a month day d hour h; -1 -1 -1 never) (dFlagS)
+a1iFlagS = $IVALUE, $IVALUE, $IVALUE
+! Output save modality (0 0 0: all hours all days; 1 0 h: once a day at hour h; 2 d h: once a month day d hour h; -1 -1 -1 never) (dFlagO)
+a1iFlagO = $IVALUE, $IVALUE, $IVALUE
+! Dynamic UC value (1=yes; 0=no)
+iFlagVarUc = $IVALUE
+! Dynamic integration step of convolution (1=yes, 0=no)
+iFlagVarDtPhysConv = $IVALUE
+! Computing snow (1=yes, 0=no)
+iFlagSnow = $IVALUE
+! Computing snow assimilation (1=yes, 0=no)
+iFlagSnowAssim = $IVALUE
+! LAI mode (0=empiric relationship, 1=using data)
+iFlagLAI = $IVALUE
+! Albedo mode (0=static value, 1=dynamic monthly values)
+iFlagAlbedo = $IVALUE
+! -----------------------------------------------------------------------------------------------
+
+! GEOGRAPHICAL INFO ------------------------------------------------------------------------------
+! Forcing data lower left angle coordinate
+a1dGeoForcing = $DVALUE, $DVALUE
+! Forcing data lat and lon cellsize
+a1dResForcing = $DVALUE, $DVALUE
+! Forcing data dimensions (passMeteo)
+a1iDimsForcing = $IVALUE, $IVALUE 
+! -----------------------------------------------------------------------------------------------
+
+! DT INFO ---------------------------------------------------------------------------------------
+! Simulation length [hours] 
+iSimLength = $IVALUE
+! Model dT [seconds]
+iDtModel = $IVALUE
+! Physics convolution integration dT [seconds] 
+iDtPhysConv = $IVALUE
+
+! Data forcing gridded and point dT [seconds]
+iDtData_Forcing = $IVALUE
+
+! Data output gridded dT [seconds]
+iDtData_Output_Gridded = $IVALUE
+! Data output point dT [seconds]
+iDtData_Output_Point = $IVALUE
+! Data state gridded dT [seconds]
+iDtData_State_Gridded = $IVALUE
+! Data state point dT [seconds]
+iDtData_State_Point = $IVALUE
+! -----------------------------------------------------------------------------------------------
+
+! DATA INFO -------------------------------------------------------------------------------------
+! Forcing data rescaling factor (permitted: 10 or 100 or 1000) --> used for binary data
+iScaleFactor = $IVALUE
+! Number of hours of routing after last observation (to undefined value = -9999)
+iTcMax = $IVALUE
+! -----------------------------------------------------------------------------------------------
+																																																		
+! TIME INFO -------------------------------------------------------------------------------------			
+! Start time (yyyymmddHHMM format)																			
+sTimeStart = $STIME
+! Initial condition time (yyyymmddHHMM format)		 																	
+sTimeStatus = $STIME
+! Re-start time (yyyymmddHHMM format)																	
+sTimeRestart = $STIME
+! -----------------------------------------------------------------------------------------------
+
+! PATH(S) INFO ----------------------------------------------------------------------------------
+! DATA STATIC
+! Static gridded data path (land data)
+sPathData_Static_Gridded = $PATH
+! Static point data path (point info file and dam Tank-Volume curve)
+sPathData_Static_Point = $PATH
+
+! DATA DYNAMIC
+! Forcing gridded data path
+sPathData_Forcing_Gridded = $PATH
+! Forcing point data path
+sPathData_Forcing_Point = $PATH
+
+! Output gridded data path
+sPathData_Output_Gridded = $PATH
+! Output point data path
+sPathData_Output_Point = $PATH
+
+! State gridded data path
+sPathData_State_Gridded = $PATH
+! State point data path
+sPathData_State_Point = $PATH
+
+! Restart gridded data path
+sPathData_Restart_Gridded = $PATH
+! Restart point data path
+sPathData_Restart_Point = $PATH
+! -----------------------------------------------------------------------------------------------
+
+/
+
+&HMC_Snow
+
+! SNOW MODEL DEFAULT CONSTANTS ------------------------------------------------------------------
+! [-]
+a1dArctUp = 3.0, 4.5, 3.0, 4.0
+! [1/day]
+a1dExpRhoLow = 0.0714, 0.0714, 0.0714, 0.0714
+! [1/day]
+a1dExpRhoHigh = 0.0333, 0.0222, 0.0250, 0.0333
+! [m asl]
+a1dAltRange = 1500.0, 2000.0, 2500.0, 2500.0
+! Glacier value in nature map [-]
+iGlacierValue = 2
+! Snow max density [kg/m^3]
+dRhoSnowMax = 400
+! Snow quality threshold [-]
+dSnowQualityThr = 0.3
+! -----------------------------------------------------------------------------------------------
+
+/
+
+&HMC_Constants
+
+! VARIABLE(S) MONTHLY INITIALIZATION ------------------------------------------------------------
+! Monthly albedo value(s)
+a1dAlbedoMonthly        = 0.18,  0.17, 0.16,  0.15,  0.15,  0.15,  0.15,  0.16,  0.16,  0.17,  0.17,  0.18
+! Monthly LAI value(s)
+a1dLAIMonthly           = 4.00,  4.00, 4.00,  4.00,  4.00,  4.00,  4.00,  4.00,  4.00,  4.00,  4.00,  4.00
+! -----------------------------------------------------------------------------------------------
+
+! WATERTABLE DEFAULT CONSTANTS ------------------------------------------------------------------
+! Watertable minimum height [mm]
+dWTableHMin = 10.0
+! Watertable maximum height under the soil [mm] ---> fmin
+dWTableHUSoil = 100.0 
+! Watertable maximum height under the channels [mm] ---> fcan
+dWTableHUChannel = 5.0
+! Maximum slope BM for initializing watertable using beta [-] ---> fpen
+dWTableSlopeBM = 0.08
+! Watertable maximum height over the bedrock (considering the limit of maximum slope BM)  [mm] ---> fov
+dWTableHOBedRock = 25.0
+! -----------------------------------------------------------------------------------------------
+
+! MASS BALANCE CONSTANTS ------------------------------------------------------------------------
+! Min hypodermicFlow ratio
+dRateMin = 0.01
+! Exp of dUcT=dUc*h^dBc
+dBc = 0.5	
+! -----------------------------------------------------------------------------------------------
+
+! ENERGY BALANCE CONSTANTS ----------------------------------------------------------------------
+! Reference temperature [K]
+dTRef = 273.15
+! TDeep shift steps
+iTdeepShift = 2
+! CH Monthly Constant
+a1dCHMonthly = -7.3, -7.3, -5.8, -5.8, -5.8, -4.8, -4.8, -4.8, -4.8, -5.9, -5.9, -7.3
+! Soil emissivity [-]
+dEpsS = 0.96
+! Stefan-Boltzmann Constant [W/m^2 K]
+dSigma = 0.00000005576
+! Min value beta function
+dBFMin = 0.1
+! Max value beta function
+dBFMax = 0.9
+
+! Z reference for wind [m]
+dZRef = 3.0
+! Gravity acceleration [m s^-2]
+dG = 9.81
+! Specific heat at constant pressure [J/kg/K]
+dCp = 1004.0
+! Gas constant for air [J/kg K]
+dRd = 287.0
+
+! Soil density [kg m^-3]
+dRhoS = 2700
+! Water density [kg m^-3]
+dRhoW = 1000
+! Soil specific heat [J kg^-1 K^-1]
+dCpS = 733
+! Water specific heat [J kg^-1 K^-1]
+dCpW = 4186
+! Quartz thermic conductivity [W m^-1 K^-1]
+dKq = 7.7
+! Water thermic conductivity [W m^-1 K^-1]
+dKw = 0.57
+! Other minerals thermic conductivity [W m^-1 K^-1] --> Orba = 4; Casentino = 2
+dKo = 4 
+! Soil Porosity [-]
+dPorS = 0.4
+! Quartz soil fraction [-]
+dFqS = 0.5
+! -----------------------------------------------------------------------------------------------
+
+! HYDRAULIC STRUCTURE CONSTANTS -----------------------------------------------------------------
+! Volume percentage to start with outgoing dam flow
+dTV = 0.95
+! Difference between dam height and spill height [m]
+dDamSpillH = 3
+! -----------------------------------------------------------------------------------------------
+
+/
+
+&HMC_Command
+
+! COMMAND LINE ----------------------------------------------------------------------------------
+! Line to zip file (tag(s): filenameunzip) 
+sCommandZipFile = 'gzip -f filenameunzip > LogZip.txt'                      
+!sCommandZipFile = "7z.exe a -tzip filenamezip filenameunzip > LogZip.txt'  
+! Line to unzip file (tag(s): filenameunzip and filenamezip) 
+sCommandUnzipFile = 'gunzip -c filenamezip > filenameunzip'                 
+!sCommandUnzipFile = '7z.exe e -tgzip filenamezip > LogUnzip.txt'           
+! Line to remove file (tag(s): filename) 
+sCommandRemoveFile = 'rm filename'                                          
+!sCommandRemoveFile = 'rm filename'                                         
+! Line to create folder (tag(s): path) 
+sCommandCreateFolder = 'mkdir -p path'                                      
+!sCommandCreateFolder = 'mkdir path'                                        
+! -----------------------------------------------------------------------------------------------
+
+/
+
+&HMC_Info
+
+! INFO MODEL ------------------------------------------------------------------------------------
+! Release version     (x.x.x)
+sReleaseVersion = '2.0.6'
+! Author(s)         (Surname N.)
+sAuthorNames = 'Delogu F., Silvestro F., Gabellani S.'
+! Release Date      (yyyy/mm/dd)
+sReleaseDate = '2016/02/23'
+! -----------------------------------------------------------------------------------------------
+
+/      
+                  

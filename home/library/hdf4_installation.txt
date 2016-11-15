@@ -1,0 +1,76 @@
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# HDF/HDF4 INSTALLATION STEPS
+#
+# Source Code:
+#   http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/
+# Installation Docs:
+#   http://www.hdfgroup.org/ftp/HDF/HDF_Current/src/unpacked/release_notes/INSTALL
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Check your compilers (fortran and c): gfortran, gcc 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Install zlib library (gfortran) 
+# Vers. 1.2.5 (http://www.zlib.net/)
+
+tar -zxvf zlib-1.2.5.tar.gz
+cd zlib-1.2.5
+./configure --prefix=/usr/local/zlib-1.2.5
+make
+make check
+sudo make install
+
+# Edit in your .bashrc
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/zlib-1.2.5/lib/
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Install hdf/hdf4 library
+tar -xvf hdf-4.2.10.tar.gz 
+cd hdf-4.2.10
+
+### 1) To Configure:
+./configure --with-zlib=/home/dpc-marche/library/zlib-1.2.5 --with-jpeg=/usr/lib/ --prefix=/home/dpc-marche/library/hdf4-4.2.10
+
+### --> configure: error: cannot find yacc utility (or bison utility)
+### sudo apt-get install bison
+
+### --> configure: error: cannot find lex utility (or flex utility)
+### sudo apt-get install flex
+
+### 2) To build the library:
+make
+### 3) To build and run the tests:
+make check
+### 4) To install the HDF4 library and tools:
+sudo make install
+### 5) To install C and Fortran examples
+sudo make install-examples
+### 6) To test the installation 
+make installcheck
+
+# Edit in your .bashrc
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/dpc-marche/library/hdf4-4.2.10/lib
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
